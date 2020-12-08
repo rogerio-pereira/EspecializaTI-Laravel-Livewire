@@ -35,4 +35,19 @@ class ShowTweets extends Component
 
         $this->content = '';
     }
+
+    //Poderia ter injetado a dependencia igual ao unlike
+    public function like($tweetId)
+    {
+        $tweet = Tweet::find($tweetId);
+
+        $tweet->likes()->create([
+            'user_id' => Auth::user()->id
+        ]);
+    }
+
+    public function unlike(Tweet $tweet)
+    {
+        $tweet->likes()->delete();
+    }
 }
