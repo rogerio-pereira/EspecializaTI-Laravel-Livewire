@@ -19,4 +19,8 @@ use App\Http\Livewire\{
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/tweets', ShowTweets::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/tweets', ShowTweets::class)->middleware('auth');
